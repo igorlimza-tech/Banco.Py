@@ -64,6 +64,9 @@ def criar_conta(lista_clientes, lista_contas):
     for i, cliente in enumerate(lista_clientes,start=1):
         print(f"{i} - {cliente.nome}")
     escolha = int(input("Qual cliente deseja escolher: "))
+    while escolha < 1 or escolha > len(lista_clientes):
+        print("Cliente inválido")
+        escolha = int(input("Escolha uma cliente válido: "))
     i_real = escolha-1
     cliente_escolhido = lista_clientes[i_real] 
     conta = int(input("Número da conta: "))
@@ -85,9 +88,15 @@ def listar_contas(lista_contas):
 
 
 def escolher_conta(lista_contas):
+    if len(lista_contas) == 0:
+        print("Nenhuma conta cadastrada")
+        return
     for i, conta in enumerate(lista_contas, start=1):
         print(f"{i} - {conta.cliente.nome}")
     escolha = int(input("Qual conta deseja escolher: "))
+    while escolha <1 or escolha>len(lista_contas):
+        print("Conta inválida")
+        escolha = int(input("Escolha uma conta válida: ")) 
     i_real = escolha - 1
     conta_escolhida = lista_contas[i_real]
     return conta_escolhida
