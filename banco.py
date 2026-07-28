@@ -69,7 +69,7 @@ def criar_conta(lista_clientes, lista_contas):
         escolha = int(input("Escolha uma cliente válido: "))
     i_real = escolha-1
     cliente_escolhido = lista_clientes[i_real] 
-    conta = int(input("Número da conta: "))
+    conta = len(lista_contas) + 1
     saldo = float(input("Saldo inicial: "))
 
     nova_conta = ContaBancaria(cliente_escolhido, conta, saldo)
