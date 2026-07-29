@@ -93,7 +93,7 @@ def escolher_conta(lista_contas):
         return
     for i, conta in enumerate(lista_contas, start=1):
         print(f"{i} - {conta.cliente.nome}")
-    escolha = int(input("Qual conta deseja escolher: "))
+    escolha = ler_int("Qual conta deseja escolher")
     while escolha <1 or escolha>len(lista_contas):
         print("Conta inválida")
         escolha = int(input("Escolha uma conta válida: ")) 
@@ -113,10 +113,33 @@ def menu_opcoes():
     print("8. Sair")
 
 
+
+
+
+def ler_int(mensagem):
+    while True:
+            try:
+                numero = int(input(mensagem))
+                return numero
+            except:
+                print("Digite apenas números! ")
+    
+
+def ler_float(mensagem):
+    while True:
+            try:
+                numero = float(input(mensagem))
+                return numero
+            except:
+                print("Digite apenas números! ")
+
+
+
 while True:
     menu_opcoes()
 
-    opcao = int(input("Escolha uma opção: "))
+    opcao = ler_int("Qual opção deseja escolher: ")
+      
 
     if opcao == 1:
         cadastrar_cliente(lista_clientes)
