@@ -63,14 +63,14 @@ def criar_conta(lista_clientes, lista_contas):
         return
     for i, cliente in enumerate(lista_clientes,start=1):
         print(f"{i} - {cliente.nome}")
-    escolha = int(input("Qual cliente deseja escolher: "))
+    escolha = ler_int("Qual cliente deseja escolher: ")
     while escolha < 1 or escolha > len(lista_clientes):
         print("Cliente inválido")
-        escolha = int(input("Escolha uma cliente válido: "))
+        escolha = ler_int("Escolha uma cliente válido: ")
     i_real = escolha-1
     cliente_escolhido = lista_clientes[i_real] 
     conta = len(lista_contas) + 1
-    saldo = float(input("Saldo inicial: "))
+    saldo = verifica_num("Saldo inicial: ")
 
     nova_conta = ContaBancaria(cliente_escolhido, conta, saldo)
     lista_contas.append(nova_conta)
@@ -93,10 +93,10 @@ def escolher_conta(lista_contas):
         return
     for i, conta in enumerate(lista_contas, start=1):
         print(f"{i} - {conta.cliente.nome}")
-    escolha = ler_int("Qual conta deseja escolher")
+    escolha = ler_int("Qual conta deseja escolher: ")
     while escolha <1 or escolha>len(lista_contas):
         print("Conta inválida")
-        escolha = int(input("Escolha uma conta válida: ")) 
+        escolha = ler_int("Escolha uma conta válida: ")
     i_real = escolha - 1
     conta_escolhida = lista_contas[i_real]
     return conta_escolhida
@@ -111,9 +111,6 @@ def menu_opcoes():
     print("6. Sacar")
     print("7. Mostrar saldo")
     print("8. Sair")
-
-
-
 
 
 def ler_int(mensagem):
@@ -133,6 +130,16 @@ def ler_float(mensagem):
             except:
                 print("Digite apenas números! ")
 
+    
+def verifica_num(mensagem):
+    while True:
+            num = ler_float(mensagem)
+            if num >0:
+                return num
+            else:
+                print("O valor tem que ser maior que R$0,00! ")
+      
+           
 
 
 while True:
@@ -156,13 +163,13 @@ while True:
     elif opcao == 5:
         conta = escolher_conta(lista_contas)
         if conta is not None:
-            valor = float(input("Insira o valor do depósito: R$ "))
+            valor = verifica_num("Insira o valor do depósito: R$ ")
             conta.depositar(valor)
         
     elif opcao == 6:
         conta = escolher_conta(lista_contas)
         if conta is not None:
-            valor = float(input("Insira o valor do saque: R$"))
+            valor = verifica_num("Insira o valor do saque: R$ ")
             conta.sacar(valor)
          
     elif opcao == 7:
