@@ -16,8 +16,18 @@ class Cliente:
 
 def cadastrar_cliente(lista_clientes):
     nome = input("Nome: ")
-    cpf = input("CPF: ")
-    telefone = input("Telefone: ")
+    while True:
+        cpf = input("CPF:")
+        if validar_cpf(cpf):
+            break
+        else:
+            print("CPF inválido tente novamente!")
+    while True:
+        telefone = input("Telefone: ")
+        if validar_tel(telefone):
+            break
+        else:
+            print("Telefone inválido tente novamente!")
 
     novo_cliente = Cliente(nome, cpf, telefone)
     lista_clientes.append(novo_cliente)
@@ -68,7 +78,7 @@ def criar_conta(lista_clientes, lista_contas):
         print("Cliente inválido")
         escolha = ler_int("Escolha uma cliente válido: ")
     i_real = escolha-1
-    cliente_escolhido = lista_clientes[i_real] 
+    cliente_escolhido = lista_clientes[i_real]  
     conta = len(lista_contas) + 1
     saldo = verifica_num("Saldo inicial: ")
 
@@ -138,9 +148,29 @@ def verifica_num(mensagem):
                 return num
             else:
                 print("O valor tem que ser maior que R$0,00! ")
-      
-           
 
+
+def validar_cpf(cpf):      
+    cpf_limpo = ""
+    for caractere in cpf:
+        if caractere.isdigit():
+            cpf_limpo += caractere 
+    if len(cpf_limpo) == 11:
+        return True
+    else:
+        return False
+
+
+def validar_tel(telefone):
+    tel_limpo = ""
+    for caractere in telefone:
+        if caractere.isdigit():
+            tel_limpo += caractere 
+    if len(tel_limpo) == 10 or len(tel_limpo) == 11:
+            return True
+    else:
+        return False    
+          
 
 while True:
     menu_opcoes()
