@@ -49,9 +49,11 @@ class ContaBancaria:
         self.cliente = cliente
         self.conta = conta
         self.saldo = saldo
+        self.extrato = []
 
     def depositar(self, valor):
         self.saldo += valor
+        self.extrato.append(f"Deposito: R${valor:.2f}")
         print("Depósito concluído com sucesso!")
 
     def sacar(self, saque):
@@ -59,12 +61,24 @@ class ContaBancaria:
             print("Você não pode sacar um valor maior que o saldo.")
         else:
             self.saldo -= saque
+            self.extrato.append(f"Saque: R${saque:.2f}")
             print("Saque concluído com sucesso!")
 
     def mostra_saldo(self):
         print(f"Conta: {self.conta}")
         print(f"Titular: {self.cliente.nome}")
         print(f"Saldo: R$ {self.saldo:.2f}")
+
+    def mostrar_extrato(self):
+        if len(self.extrato) == 0:
+            print("Nenhuma operação realizada!")
+        else:
+            print("\n" + "=" * 12)
+            print("EXTRATO")
+            print("=" * 12)
+
+        for operacao in self.extrato:
+            print(operacao)
 
 
 def criar_conta(lista_clientes, lista_contas):
@@ -120,7 +134,8 @@ def menu_opcoes():
     print("5. Depositar")
     print("6. Sacar")
     print("7. Mostrar saldo")
-    print("8. Sair")
+    print("8. Mostrar extrato")
+    print("9. Sair")
 
 
 def ler_int(mensagem):
@@ -208,6 +223,11 @@ while True:
            conta.mostra_saldo()
 
     elif opcao == 8:
+        conta = escolher_conta(lista_contas)
+        if conta is not None:
+            conta.mostrar_extrato()
+
+    elif opcao == 9:
         print("Saindo do programa...")
         break
 
